@@ -1,0 +1,14 @@
+.chiplist {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: row;
+  justify-content: center;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.measurable {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+}

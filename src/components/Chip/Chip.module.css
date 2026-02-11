@@ -1,0 +1,88 @@
+.chip {
+  max-width: 100%;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px;
+  white-space: nowrap;
+  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+  outline: 0;
+  text-decoration: none;
+  border: 0;
+  padding: 0 8px;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.color-neutral{
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+.color-accent {
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+.color-error {
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+.color-info {
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+.color-success {
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+.color-warning {
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+
+.chip:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.chip:hover{
+  border-color: blue;
+}
+
+/* Disabled State */
+.disabled {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+/* Size Variants */
+.size-small {
+  height: 24px;
+  padding: 0 4px;
+  border-radius: 8px;
+}
+
+.size-medium {
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 16px;
+}
+
+/* Filled Variant */
+.variant-filled {
+  background-color: var(--chip-color-main);
+  color: var(--chip-color-text);
+}
+
+/* Outlined Variant */
+.variant-outlined {
+  color: var(--chip-color-main);
+  background-color: transparent;
+  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, black 20%);
+}

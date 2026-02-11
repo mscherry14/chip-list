@@ -1,0 +1,63 @@
+.content {
+  max-width: 50vw; 
+  width: max-content; 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 8px; 
+  background: rgb(84, 84, 84); 
+  border-radius: 8px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  outline: none;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-neutral {
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+
+.color-accent {
+  --chip-color-main: #fff;
+  --chip-color-text: #000000;
+}
+
+/* Size Variants */
+.size-small {
+  height: 24px;
+  padding: 0 4px;
+  border-radius: 8px;
+}
+
+.size-medium {
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 16px;
+}
+
+/* Size Variants */
+.icon-size-small {
+  height: 22px;
+}
+
+.icon-size-medium {
+  height: 30px;
+}
+
+/* Filled Variant */
+.variant-filled {
+  background-color: var(--chip-color-main);
+  color: var(--chip-color-text);
+}
+
+/* Outlined Variant */
+.variant-outlined {
+  color: var(--chip-color-main);
+  background-color: transparent;
+  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, black 20%);
+}

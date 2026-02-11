@@ -1,0 +1,187 @@
+import {
+  useFloating,
+  autoUpdate,
+  useClick,
+  useDismiss,
+  useRole,
+  useInteractions,
+  FloatingFocusManager,
+  useMergeRefs,
+  FloatingPortal,
+  offset,
+  flip,
+  shift,
+} from "@floating-ui/react";
+import { useState, useMemo, createContext, useContext } from "react";
+import styles from "./ChipLIstPopover.module.css";
+import { cx } from "../../utils/cx";
+
+function usePopover() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { refs, floatingStyles, context } = useFloating({
+    placement: "bottom-end",
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    middleware: [offset(10), flip(), shift({ padding: 16 })],
+    whileElementsMounted: autoUpdate,
+  });
+
+  const click = useClick(context);
+  const dismiss = useDismiss(context, {
+    ancestorScroll: true,
+    //bubbles: false,
+  }); //TODO: dont forget setup FloatingTree or set default bubbles
+  const role = useRole(context, { role: "select" });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    click,
+    dismiss,
+    role,
+  ]);
+
+  return useMemo(
+    () => ({
+      isOpen,
+      setIsOpen,
+      refs,
+      floatingStyles,
+      context,
+      getReferenceProps,
+      getFloatingProps,
+    }),
+    [
+      isOpen,
+      setIsOpen,
+      refs,
+      floatingStyles,
+      context,
+      getReferenceProps,
+      getFloatingProps,
+    ],
+  );
+}
+
+type PopoverContextType = ReturnType<typeof usePopover> | null;
+
+const PopoverContext = createContext<PopoverContextType>(null);
+
+const usePopoverContext = () => {
+  const context = useContext(PopoverContext);
+
+  if (context == null) {
+    throw new Error("Popover components must be wrapped in <Popover />");
+  }
+
+  return context;
+};
+
+interface IChipListPopoverProps {
+  children: React.ReactNode;
+}
+
+const ChipListPopover: React.FC<IChipListPopoverProps> = ({
+  children,
+}:
+IChipListPopoverProps) => {
+  const popover = usePopover();
+  return (
+    <PopoverContext.Provider value={popover}>
+      {children}
+    </PopoverContext.Provider>
+  );
+};
+
+type TriggerColor = "neutral" | "accent";
+type TriggerVariant = "filled" | "outlined";
+type TriggerSize = "small" | "medium";
+
+interface IChipLIstPopoverTriggerProps {
+  children?: React.ReactNode;
+  ref?: React.Ref<HTMLButtonElement>;
+
+  color?: TriggerColor;
+  variant?: TriggerVariant;
+  size?: TriggerSize;
+}
+
+const ChipListPopoverTrigger: React.FC<IChipLIstPopoverTriggerProps> = ({
+  children,
+  ref: propRef,
+
+  color = "neutral",
+  variant = "filled",
+  size = "medium",
+}) => {
+  const context = usePopoverContext();
+  const ref = useMergeRefs([context.refs.setReference, propRef]);
+
+  return (
+    <button
+      ref={ref}
+      type="button"
+      // The user can style the trigger based on the state
+      // data-state={context.isOpen ? "open" : "closed"}
+      {...context.getReferenceProps({
+        className: cx(
+          styles.trigger,
+          styles[`variant-${variant}`],
+          styles[`size-${size}`],
+          styles[`color-${color}`],
+        ),
+      })}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        width={24}
+        height={24}
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className={cx(
+          styles[`icon-size-${size}`],
+        )}
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+        />
+      </svg>
+
+      {children}
+    </button>
+  );
+};
+
+interface IChipLIstPopoverContentProps {
+  children?: React.ReactNode;
+  ref?: React.Ref<HTMLDivElement>;
+}
+
+const ChipListPopoverContent: React.FC<IChipLIstPopoverContentProps> = ({
+  children,
+  ref: propRef,
+}) => {
+  const { context: floatingContext, ...context } = usePopoverContext();
+  const ref = useMergeRefs([context.refs.setFloating, propRef]);
+
+  if (!floatingContext.open) return null;
+
+  return (
+    <FloatingPortal>
+      <FloatingFocusManager context={floatingContext} modal={false}>
+        <div
+          ref={ref}
+          style={{ ...context.floatingStyles }}
+          {...context.getFloatingProps({ className: styles.content })}
+        >
+          {children}
+        </div>
+      </FloatingFocusManager>
+    </FloatingPortal>
+  );
+};
+
+export { ChipListPopover, ChipListPopoverTrigger, ChipListPopoverContent };
