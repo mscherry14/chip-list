@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import { Chip } from "../Chip/Chip";
 import {
   ChipListPopover,
@@ -6,12 +6,9 @@ import {
   ChipListPopoverContent,
 } from "../ChipListPopover/ChipListPopover";
 import styles from "./ChipList.module.css";
+import type { ChipID, ChipData } from "./ChipList.types";
 import { useVisibleChips } from "./useVisibleChips";
-
-export interface ChipData {
-  id: number | string;
-  label: string;
-}
+import { useMultiSelect } from "./useMultiSelect";
 
 interface IChipListProps<T extends ChipData> {
   items: T[];
@@ -29,6 +26,19 @@ const ChipList = <T extends ChipData>({ items }: IChipListProps<T>) => {
     moreButtonRef: moreButtonRef,
   });
 
+  const {toggle, isSelected} = useMultiSelect<ChipID>();
+
+  const defaultRenderChip = useCallback((item: T) => (
+    <Chip
+      key={item.id}
+      label={item.label}
+      selected={isSelected(item.id)}
+      onSelectChange={() => {toggle(item.id)}}
+      variant="filled"
+      color="neutral"
+    />
+  ), [isSelected, toggle]);
+
   //TODO: gaps
   return (
     <div
@@ -38,16 +48,12 @@ const ChipList = <T extends ChipData>({ items }: IChipListProps<T>) => {
       }}
     >
       <div className={styles.chiplist}>
-        {items.slice(0, visibleCount).map((item, index) => (
-          <Chip key={item.id} label={item.label} selected={index % 2 == 0} variant="filled" color="neutral"/>
-        ))}
+        {items.slice(0, visibleCount).map(defaultRenderChip)}
         {visibleCount < items.length && (
           <ChipListPopover>
             <ChipListPopoverTrigger variant="filled"></ChipListPopoverTrigger>
             <ChipListPopoverContent>
-              {items.slice(visibleCount).map((item, index) => (
-                <Chip key={item.id} label={item.label} selected={index % 2 == 0}  variant="filled" color="neutral"/>
-              ))}
+              {items.slice(visibleCount).map(defaultRenderChip)}
             </ChipListPopoverContent>
           </ChipListPopover>
         )}
@@ -61,7 +67,7 @@ const ChipList = <T extends ChipData>({ items }: IChipListProps<T>) => {
             }}
             key={item.id}
           >
-            <Chip label={item.label} selected={index % 2 == 0}  variant="filled" color="neutral"/>
+            {defaultRenderChip(item)}
           </div>
         ))}
         {

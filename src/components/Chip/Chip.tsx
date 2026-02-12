@@ -6,7 +6,7 @@ interface IChipProps {
   label: React.ReactNode;
 
   selected?: boolean;
-  onSelectChange?: (selected: boolean) => void;
+  onSelectChange?: () => void;
 
   disabled?: boolean;
 
@@ -44,6 +44,7 @@ const Chip: React.FC<IChipProps> = ({
         },
         className,
       )}
+      onClick={onSelectChange}
     >
       {selected && (
         <svg

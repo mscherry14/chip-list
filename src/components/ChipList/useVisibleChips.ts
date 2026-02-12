@@ -1,13 +1,13 @@
 import { useLayoutEffect, useState } from "react";
 
-interface Params<T extends { id: number | string }> {
+interface Params<T> {
   items: T[];
   containerRef: React.RefObject<HTMLDivElement | null>;
   chipRefs: React.RefObject<(HTMLElement | null)[]>;
   moreButtonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export function useVisibleChips<T extends { id: number | string }>({
+export function useVisibleChips<T>({
   items,
   containerRef,
   chipRefs,
