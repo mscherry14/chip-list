@@ -38,15 +38,15 @@ const ChipList = <T extends ChipData>({ items }: IChipListProps<T>) => {
       }}
     >
       <div className={styles.chiplist}>
-        {items.slice(0, visibleCount).map((item) => (
-          <Chip key={item.id} label={item.label} variant="outlined" />
+        {items.slice(0, visibleCount).map((item, index) => (
+          <Chip key={item.id} label={item.label} selected={index % 2 == 0} variant="filled" color="neutral"/>
         ))}
         {visibleCount < items.length && (
           <ChipListPopover>
-            <ChipListPopoverTrigger variant="outlined"></ChipListPopoverTrigger>
+            <ChipListPopoverTrigger variant="filled"></ChipListPopoverTrigger>
             <ChipListPopoverContent>
-              {items.slice(visibleCount).map((item) => (
-                <Chip key={item.id} label={item.label} variant="outlined" />
+              {items.slice(visibleCount).map((item, index) => (
+                <Chip key={item.id} label={item.label} selected={index % 2 == 0}  variant="filled" color="neutral"/>
               ))}
             </ChipListPopoverContent>
           </ChipListPopover>
@@ -61,7 +61,7 @@ const ChipList = <T extends ChipData>({ items }: IChipListProps<T>) => {
             }}
             key={item.id}
           >
-            <Chip label={item.label} />
+            <Chip label={item.label} selected={index % 2 == 0}  variant="filled" color="neutral"/>
           </div>
         ))}
         {

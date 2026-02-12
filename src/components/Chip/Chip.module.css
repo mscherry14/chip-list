@@ -11,8 +11,8 @@
   background-color: rgba(255, 255, 255, 1);
   border-radius: 16px;
   white-space: nowrap;
-  transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1); */
   cursor: default;
   outline: 0;
   text-decoration: none;
@@ -20,38 +20,51 @@
   padding: 0 8px;
   vertical-align: middle;
   box-sizing: border-box;
+  gap: 4px;
 }
 
-.color-neutral{
-  --chip-color-main: #fff;
-  --chip-color-text: #000000;
+.color-neutral {
+  --chip-color-main: purple;
+  --chip-color-text: #fff;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-accent {
-  --chip-color-main: #fff;
+  --chip-color-main: yellow;
   --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-error {
-  --chip-color-main: #fff;
-  --chip-color-text: #000000;
+  --chip-color-main: rgb(214, 1, 1);
+  --chip-color-text: #fff;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-info {
-  --chip-color-main: #fff;
+  --chip-color-main: cornflowerblue;
   --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-success {
-  --chip-color-main: #fff;
+  --chip-color-main: lime;
   --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-warning {
-  --chip-color-main: #fff;
+  --chip-color-main: orange;
   --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 
 .chip:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.chip:hover{
+.chip:hover {
   border-color: blue;
 }
 
@@ -74,15 +87,45 @@
   border-radius: 16px;
 }
 
+/* Size Variants */
+.icon-size-small {
+  height: 16px;
+}
+
+.icon-size-medium {
+  height: 16px;
+}
+
 /* Filled Variant */
 .variant-filled {
+  background-color: color-mix(
+    in oklab,
+    var(--chip-color-main) 35%,
+    color-mix(
+        in oklab,
+        var(--chip-color-text) 20%,
+        var(--chip-color-surface) 100%
+      )
+      100%
+  );
+  color: var(--chip-color-on-surface);
+}
+
+.variant-filled.selected {
   background-color: var(--chip-color-main);
   color: var(--chip-color-text);
 }
 
 /* Outlined Variant */
 .variant-outlined {
-  color: var(--chip-color-main);
+  color:
+  color-mix(in oklab, var(--chip-color-main) 100%, var(--chip-color-on-surface) 60%);
   background-color: transparent;
-  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, black 20%);
+  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, var(--chip-color-on-surface) 40%);
+}
+
+.variant-outlined.selected {
+  color: var(--chip-color-text);
+  background-color: var(--chip-color-main);
+  border: 1px solid var(--chip-color-main);
 }

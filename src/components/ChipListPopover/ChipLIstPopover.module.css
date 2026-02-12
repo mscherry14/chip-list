@@ -15,16 +15,44 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 0;
 }
 
 .color-neutral {
-  --chip-color-main: #fff;
-  --chip-color-text: #000000;
+  --chip-color-main: purple;
+  --chip-color-text: #fff;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
-
 .color-accent {
-  --chip-color-main: #fff;
+  --chip-color-main: yellow;
   --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+}
+.color-error {
+  --chip-color-main: rgb(214, 1, 1);
+  --chip-color-text: #fff;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+}
+.color-info {
+  --chip-color-main: cornflowerblue;
+  --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+}
+.color-success {
+  --chip-color-main: lime;
+  --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+}
+.color-warning {
+  --chip-color-main: orange;
+  --chip-color-text: #000000;
+  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
+  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 
 /* Size Variants */
@@ -51,13 +79,23 @@
 
 /* Filled Variant */
 .variant-filled {
-  background-color: var(--chip-color-main);
-  color: var(--chip-color-text);
+  background-color: color-mix(
+    in oklab,
+    var(--chip-color-main) 35%,
+    color-mix(
+        in oklab,
+        var(--chip-color-text) 20%,
+        var(--chip-color-surface) 100%
+      )
+      100%
+  );
+  color: var(--chip-color-on-surface);
 }
 
 /* Outlined Variant */
 .variant-outlined {
-  color: var(--chip-color-main);
+  color:
+  color-mix(in oklab, var(--chip-color-main) 100%, var(--chip-color-on-surface) 60%);
   background-color: transparent;
-  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, black 20%);
+  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, var(--chip-color-on-surface) 40%);
 }
