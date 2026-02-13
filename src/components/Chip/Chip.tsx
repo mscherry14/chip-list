@@ -1,6 +1,7 @@
 import { cx } from "../../utils/cx";
 import type { ChipColor, ChipSize, ChipVariant } from "./Chip.types";
 import styles from "./Chip.module.css";
+import CheckIcon from "../../assets/CheckIcon";
 
 interface IChipProps {
   label: React.ReactNode;
@@ -46,23 +47,7 @@ const Chip: React.FC<IChipProps> = ({
       )}
       onClick={onSelectChange}
     >
-      {selected && (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className={cx(styles[`icon-size-${size}`])}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m4.5 12.75 6 6 9-13.5"
-          />
-        </svg>
-      )}
-
+      {selected && <CheckIcon className={cx(styles[`icon-size-${size}`])} />}
       <span>{label}</span>
     </Component>
   );

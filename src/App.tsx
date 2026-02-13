@@ -1,5 +1,5 @@
 import "./App.css";
-import type { ChipData } from "./components/ChipList/ChipList.tsx";
+import type { ChipData } from "./components/ChipList/ChipList.types"
 import { ChipList } from "./components/ChipList/ChipList.tsx";
 
 function App() {

@@ -13,7 +13,13 @@ import {
   shift,
 } from "@floating-ui/react";
 import { useState, useMemo, createContext, useContext } from "react";
-import styles from "./ChipLIstPopover.module.css";
+import styles from "./ChipListPopover.module.css";
+import type {
+  TriggerColor,
+  TriggerSize,
+  TriggerVariant,
+} from "./ChipListPopover.types";
+import MoreIcon from "../../assets/MoreIcon";
 import { cx } from "../../utils/cx";
 
 function usePopover() {
@@ -82,8 +88,7 @@ interface IChipListPopoverProps {
 
 const ChipListPopover: React.FC<IChipListPopoverProps> = ({
   children,
-}:
-IChipListPopoverProps) => {
+}: IChipListPopoverProps) => {
   const popover = usePopover();
   return (
     <PopoverContext.Provider value={popover}>
@@ -91,10 +96,6 @@ IChipListPopoverProps) => {
     </PopoverContext.Provider>
   );
 };
-
-type TriggerColor = "neutral" | "accent";
-type TriggerVariant = "filled" | "outlined";
-type TriggerSize = "small" | "medium";
 
 interface IChipLIstPopoverTriggerProps {
   children?: React.ReactNode;
@@ -131,24 +132,7 @@ const ChipListPopoverTrigger: React.FC<IChipLIstPopoverTriggerProps> = ({
         ),
       })}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        width={24}
-        height={24}
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className={cx(
-          styles[`icon-size-${size}`],
-        )}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-        />
-      </svg>
+      <MoreIcon className={cx(styles[`icon-size-${size}`])} />
 
       {children}
     </button>
