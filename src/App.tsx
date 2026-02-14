@@ -26,7 +26,7 @@ function App() {
           "i was made for loving you baby you was made for loving me and i can't get enough of you baby can you get enough of me"
         }
       /> */}
-      <ChipList items={items} />
+      <ChipList items={items} chipStyle={{color: "accent", variant: 'outlined'}} />
     </>
   );
 }

@@ -1,19 +1,17 @@
 import { useLayoutEffect, useState } from "react";
 
-interface Params<T> {
-  items: T[];
+interface UseVisibleChipsParams {
   containerRef: React.RefObject<HTMLDivElement | null>;
   chipRefs: React.RefObject<(HTMLElement | null)[]>;
   moreButtonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export function useVisibleChips<T>({
-  items,
+export function useVisibleChips({
   containerRef,
   chipRefs,
   moreButtonRef,
-}: Params<T>) {
-  const [visibleCount, setVisibleCount] = useState(items.length);
+}: UseVisibleChipsParams) : number {
+  const [visibleCount, setVisibleCount] = useState(chipRefs.current.length);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -22,7 +20,7 @@ export function useVisibleChips<T>({
     const calculate = () => {
       const containerWidth = container.offsetWidth;
       const gap = (() => {
-        if (items.length < 2) return 0;
+        if (chipRefs.current?.length < 2) return 0;
 
         const first = chipRefs.current[0];
         const second = chipRefs.current[1];
@@ -45,7 +43,7 @@ export function useVisibleChips<T>({
 
         const width = el.getBoundingClientRect().width;
 
-        const remaining = items.length - (count + 1);
+        const remaining = chipRefs.current?.length - (count + 1);
 
         const needMoreButton = remaining > 0;
 
@@ -69,7 +67,7 @@ export function useVisibleChips<T>({
     calculate();
 
     return () => observer.disconnect();
-  }, [items, containerRef, chipRefs, moreButtonRef]);
+  }, [containerRef, chipRefs, moreButtonRef]);
 
   return visibleCount;
 }

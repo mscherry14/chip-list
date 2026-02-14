@@ -1,26 +1,56 @@
 .chip {
-  max-width: 100%;
   font-family: inherit;
   font-size: 0.8125rem;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-decoration: none;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  vertical-align: middle;
+  position: relative;
+  
   height: 32px;
-  line-height: 1.5;
+  padding: 0 8px;
+  gap: 4px;
+  max-width: 100%;
+
   color: rgba(0, 0, 0, 0.87);
   background-color: rgba(255, 255, 255, 1);
+
   border-radius: 16px;
-  white-space: nowrap;
-  /* transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1); */
-  cursor: default;
-  outline: 0;
-  text-decoration: none;
   border: 0;
-  padding: 0 8px;
-  vertical-align: middle;
-  box-sizing: border-box;
-  gap: 4px;
+  outline: 0;
+
+  transition: all 0.2s ease;
+
+  cursor: default;
+}
+
+.chip-button {
+  cursor: pointer;
+}
+
+.chip-button:hover::after  {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: currentColor; 
+  opacity: 0.08;
+  border-radius: inherit;
+  border: inherit;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.chip-button:active::after {
+  cursor: pointer;
+  opacity: 0.16;
 }
 
 .color-neutral {
@@ -60,18 +90,16 @@
   --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 
-.chip:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.chip:hover {
-  border-color: blue;
-}
-
 /* Disabled State */
+.chip:disabled,
 .disabled {
   opacity: 0.38;
   pointer-events: none;
+}
+
+.chip:disabled:focus-visible,
+.disabled:focus-visible {
+  outline: none;
 }
 
 /* Size Variants */
@@ -87,7 +115,7 @@
   border-radius: 16px;
 }
 
-/* Size Variants */
+/* Icon Size Variants */
 .icon-size-small {
   height: 16px;
 }
@@ -118,10 +146,18 @@
 
 /* Outlined Variant */
 .variant-outlined {
-  color:
-  color-mix(in oklab, var(--chip-color-main) 100%, var(--chip-color-on-surface) 60%);
+  color: color-mix(
+    in oklab,
+    var(--chip-color-main) 100%,
+    var(--chip-color-on-surface) 60%
+  );
   background-color: transparent;
-  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, var(--chip-color-on-surface) 40%);
+  border: 1px solid
+    color-mix(
+      in oklab,
+      var(--chip-color-main) 90%,
+      var(--chip-color-on-surface) 40%
+    );
 }
 
 .variant-outlined.selected {

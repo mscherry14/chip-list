@@ -12,7 +12,7 @@ import { useMultiSelect } from "./useMultiSelect";
 import type { ChipStyle } from "../Chip/Chip.types";
 import type { TriggerStyle } from "../ChipListPopover/ChipListPopover.types";
 
-interface IChipListProps<T extends ChipData> {
+interface ChipListProps<T extends ChipData> {
   items: T[];
   chipStyle?: ChipStyle;
   triggerStyle?: TriggerStyle;
@@ -22,7 +22,7 @@ const ChipList = <T extends ChipData>({
   items,
   chipStyle,
   triggerStyle,
-}: IChipListProps<T>) => {
+}: ChipListProps<T>) => {
   const chipRefs = useRef<(HTMLElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const moreButtonRef = useRef<HTMLButtonElement>(null);
@@ -32,13 +32,17 @@ const ChipList = <T extends ChipData>({
   }, [items.length]);
 
   const visibleCount = useVisibleChips({
-    items: items,
     containerRef: containerRef,
     chipRefs: chipRefs,
     moreButtonRef: moreButtonRef,
   });
 
   const { toggle, isSelected } = useMultiSelect<ChipID>();
+
+  // remove if trigger not chip-styled (or/and we don't want it by default)
+  if (!triggerStyle) {
+    triggerStyle = chipStyle;
+  }
 
   const defaultRenderChip = useCallback(
     (item: T) => (
@@ -57,12 +61,14 @@ const ChipList = <T extends ChipData>({
     [isSelected, toggle, chipStyle],
   );
 
-  //TODO: gaps
   return (
     <>
-      <div className={styles.chiplist} ref={(el) => {
-        containerRef.current = el;
-      }}>
+      <div
+        className={styles.chiplist}
+        ref={(el) => {
+          containerRef.current = el;
+        }}
+      >
         {items.slice(0, visibleCount).map(defaultRenderChip)}
         {visibleCount < items.length && (
           <ChipListPopover>

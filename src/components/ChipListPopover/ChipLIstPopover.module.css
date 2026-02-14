@@ -1,13 +1,29 @@
 .content {
-  max-width: 50vw; 
-  width: max-content; 
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 8px; 
-  background: rgb(84, 84, 84); 
-  border-radius: 8px; 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+
+  max-width: 50vw;
+  width: max-content;
+  gap: 8px;
   padding: 12px;
+
+  background-color: var(--color-surface, light-dark(white, black));
+
+  border-radius: 8px;
+  box-shadow:
+    0 0px 4px -1px
+      color-mix(
+        in oklab,
+        var(--color-on-surface, light-dark(black, white)) 20%,
+        transparent
+      ),
+    0 2px 8px 0px
+      color-mix(
+        in oklab,
+        var(--color-on-surface, light-dark(black, white)) 10%,
+        transparent
+      );
+
   outline: none;
 }
 
@@ -15,7 +31,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   border: 0;
+  cursor: pointer;
+}
+
+.trigger:hover::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: currentColor;
+  opacity: 0.08;
+  border-radius: inherit;
+  border: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.trigger:active::after {
+  cursor: pointer;
+  opacity: 0.16;
 }
 
 .color-neutral {
@@ -68,7 +106,7 @@
   border-radius: 16px;
 }
 
-/* Size Variants */
+/* Icon Size Variants */
 .icon-size-small {
   height: 22px;
 }
@@ -94,8 +132,16 @@
 
 /* Outlined Variant */
 .variant-outlined {
-  color:
-  color-mix(in oklab, var(--chip-color-main) 100%, var(--chip-color-on-surface) 60%);
+  color: color-mix(
+    in oklab,
+    var(--chip-color-main) 100%,
+    var(--chip-color-on-surface) 60%
+  );
   background-color: transparent;
-  border: 1px solid color-mix(in oklab, var(--chip-color-main) 90%, var(--chip-color-on-surface) 40%);
+  border: 1px solid
+    color-mix(
+      in oklab,
+      var(--chip-color-main) 90%,
+      var(--chip-color-on-surface) 40%
+    );
 }

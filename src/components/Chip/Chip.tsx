@@ -3,7 +3,7 @@ import type { ChipColor, ChipSize, ChipVariant } from "./Chip.types";
 import styles from "./Chip.module.css";
 import CheckIcon from "../../assets/CheckIcon";
 
-interface IChipProps {
+interface ChipProps {
   label: React.ReactNode;
 
   selected?: boolean;
@@ -18,7 +18,7 @@ interface IChipProps {
   className?: string;
 }
 
-const Chip: React.FC<IChipProps> = ({
+const Chip: React.FC<ChipProps> = ({
   label,
 
   selected,
@@ -36,6 +36,9 @@ const Chip: React.FC<IChipProps> = ({
     <Component
       className={cx(
         styles.chip,
+        {
+          [styles[`chip-button`]]: !!onSelectChange,
+        },
         styles[`variant-${variant}`],
         styles[`size-${size}`],
         styles[`color-${color}`],

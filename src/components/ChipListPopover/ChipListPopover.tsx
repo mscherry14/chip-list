@@ -21,6 +21,7 @@ import type {
 } from "./ChipListPopover.types";
 import MoreIcon from "../../assets/MoreIcon";
 import { cx } from "../../utils/cx";
+import type { ExpandProps } from "../../utils/ExpandProps";
 
 function usePopover() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +37,7 @@ function usePopover() {
   const click = useClick(context);
   const dismiss = useDismiss(context, {
     ancestorScroll: true,
-    //bubbles: false,
-  }); //TODO: dont forget setup FloatingTree or set default bubbles
+  }); 
   const role = useRole(context, { role: "select" });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
@@ -82,13 +82,11 @@ const usePopoverContext = () => {
   return context;
 };
 
-interface IChipListPopoverProps {
+interface ChipListPopoverProps {
   children: React.ReactNode;
 }
 
-const ChipListPopover: React.FC<IChipListPopoverProps> = ({
-  children,
-}: IChipListPopoverProps) => {
+const ChipListPopover: React.FC<ChipListPopoverProps> = ({ children }) => {
   const popover = usePopover();
   return (
     <PopoverContext.Provider value={popover}>
@@ -97,7 +95,7 @@ const ChipListPopover: React.FC<IChipListPopoverProps> = ({
   );
 };
 
-interface IChipLIstPopoverTriggerProps {
+interface ChipListPopoverTriggerProps {
   children?: React.ReactNode;
   ref?: React.Ref<HTMLButtonElement>;
 
@@ -106,13 +104,15 @@ interface IChipLIstPopoverTriggerProps {
   size?: TriggerSize;
 }
 
-const ChipListPopoverTrigger: React.FC<IChipLIstPopoverTriggerProps> = ({
+const ChipListPopoverTrigger: React.FC<ExpandProps<ChipListPopoverTriggerProps, HTMLButtonElement>> = ({
   children,
   ref: propRef,
 
   color = "neutral",
   variant = "filled",
   size = "medium",
+
+  ...props
 }) => {
   const context = usePopoverContext();
   const ref = useMergeRefs([context.refs.setReference, propRef]);
@@ -121,14 +121,14 @@ const ChipListPopoverTrigger: React.FC<IChipLIstPopoverTriggerProps> = ({
     <button
       ref={ref}
       type="button"
-      // The user can style the trigger based on the state
-      // data-state={context.isOpen ? "open" : "closed"}
       {...context.getReferenceProps({
+        ...props,
         className: cx(
           styles.trigger,
           styles[`variant-${variant}`],
           styles[`size-${size}`],
           styles[`color-${color}`],
+          props?.className,
         ),
       })}
     >
@@ -139,15 +139,14 @@ const ChipListPopoverTrigger: React.FC<IChipLIstPopoverTriggerProps> = ({
   );
 };
 
-interface IChipLIstPopoverContentProps {
+interface ChipListPopoverContentProps {
   children?: React.ReactNode;
   ref?: React.Ref<HTMLDivElement>;
 }
 
-const ChipListPopoverContent: React.FC<IChipLIstPopoverContentProps> = ({
-  children,
-  ref: propRef,
-}) => {
+const ChipListPopoverContent: React.FC<
+  ExpandProps<ChipListPopoverContentProps, HTMLDivElement>
+> = ({ children, ref: propRef, ...props }) => {
   const { context: floatingContext, ...context } = usePopoverContext();
   const ref = useMergeRefs([context.refs.setFloating, propRef]);
 
@@ -159,7 +158,10 @@ const ChipListPopoverContent: React.FC<IChipLIstPopoverContentProps> = ({
         <div
           ref={ref}
           style={{ ...context.floatingStyles }}
-          {...context.getFloatingProps({ className: styles.content })}
+          {...context.getFloatingProps({
+            ...props,
+            className: cx(styles.content, props?.className),
+          })}
         >
           {children}
         </div>
