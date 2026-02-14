@@ -25,7 +25,8 @@
     "dev": "vite",
     "build": "vite build && tsc -b",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "example": "vite build && tsc -b && cd example && npm install --legacy-peer-deps && rm -rf node_modules/.vite node_modules/.cache node_modules/react node_modules/react-dom && vite"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -49,7 +50,6 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
-    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-lib-inject-css": "^2.2.2"
   }
 }

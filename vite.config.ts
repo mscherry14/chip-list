@@ -4,20 +4,22 @@ import react from "@vitejs/plugin-react";
 import { libInjectCss } from "vite-plugin-lib-inject-css";
 
 export default defineConfig({
-  plugins: [
-    react(),
-    libInjectCss(),
-  ],
+  plugins: [react(), libInjectCss()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      formats: ["es"], 
+      formats: ["es"],
       fileName: "index",
     },
     rollupOptions: {
-      external: [/^@floating-ui\/.*/, "react", "react/jsx-runtime", "react-dom"],
+      external: [
+        /^@floating-ui\/.*/,
+        "react",
+        "react/jsx-runtime",
+        "react-dom",
+      ],
       output: {
-        preserveModules: true, 
+        preserveModules: true,
         preserveModulesRoot: "src",
         entryFileNames: "[name].js",
         assetFileNames: (assetInfo) => {

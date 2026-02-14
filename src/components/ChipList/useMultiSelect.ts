@@ -7,9 +7,7 @@ interface UseMultiSelectReturn<T> {
 }
 
 export function useMultiSelect<T>(): UseMultiSelectReturn<T> {
-  const [selectedIds, setSelectedIds] = useState<Set<T>>(
-    new Set<T>(),
-  );
+  const [selectedIds, setSelectedIds] = useState<Set<T>>(new Set<T>());
 
   const toggle = useCallback((id: T) => {
     setSelectedIds((prev) => {
@@ -23,10 +21,7 @@ export function useMultiSelect<T>(): UseMultiSelectReturn<T> {
     });
   }, []);
 
-  const isSelected = useCallback(
-    (id: T) => selectedIds.has(id),
-    [selectedIds],
-  );
+  const isSelected = useCallback((id: T) => selectedIds.has(id), [selectedIds]);
 
   return {
     selectedIds,
