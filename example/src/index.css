@@ -28,6 +28,16 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  max-width: 1280px;
+  padding: 2rem;
+  text-align: center;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  flex: 1 1 0;
+}
+
 /* button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 } */

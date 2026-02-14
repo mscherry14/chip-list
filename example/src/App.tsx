@@ -1,6 +1,6 @@
-import "./App.css";
-import type { ChipData } from "./components/ChipList/ChipList.types"
-import { ChipList } from "./components/ChipList/ChipList.tsx";
+import type { ChipData } from "chip-list"
+import { ChipList } from "chip-list";
+import './App.css';
 
 function App() {
   const items: ChipData[] = [
@@ -21,11 +21,6 @@ function App() {
 
   return (
     <>
-      {/* <Chip
-        label={
-          "i was made for loving you baby you was made for loving me and i can't get enough of you baby can you get enough of me"
-        }
-      /> */}
       <ChipList items={items} chipStyle={{color: "accent", variant: 'outlined'}} />
     </>
   );
