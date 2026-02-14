@@ -11,8 +11,8 @@
   /* --color-surface: white;
   --color-on-surface:  black; */
 
-  background-color: var(--color-surface, white);
-  color: var(--color-on-surface, black);
+  background-color: var(--color-surface, light-dark(white, black));
+  color: var(--color-on-surface, light-dark(black, white));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
