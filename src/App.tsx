@@ -1,7 +1,6 @@
 import "./App.css";
-import type { ChipData } from "./components/ChipList/ChipList.types";
-import { ChipList } from "./components/ChipList/ChipList.tsx";
-import { Chip } from "./components/Chip/Chip.tsx";
+import type { ChipData } from "./index.ts";
+import { ChipList, Chip } from "./index.ts";
 import { useState } from "react";
 
 const items: ChipData[] = [
