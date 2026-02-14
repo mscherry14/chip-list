@@ -37,7 +37,7 @@ function usePopover() {
   const click = useClick(context);
   const dismiss = useDismiss(context, {
     ancestorScroll: true,
-  }); 
+  });
   const role = useRole(context, { role: "select" });
 
   const { getReferenceProps, getFloatingProps } = useInteractions([
@@ -104,7 +104,9 @@ interface ChipListPopoverTriggerProps {
   size?: TriggerSize;
 }
 
-const ChipListPopoverTrigger: React.FC<ExpandProps<ChipListPopoverTriggerProps, HTMLButtonElement>> = ({
+const ChipListPopoverTrigger: React.FC<
+  ExpandProps<ChipListPopoverTriggerProps, HTMLButtonElement>
+> = ({
   children,
   ref: propRef,
 

@@ -11,7 +11,7 @@
   box-sizing: border-box;
   vertical-align: middle;
   position: relative;
-  
+
   height: 32px;
   padding: 0 8px;
   gap: 4px;
@@ -33,14 +33,14 @@
   cursor: pointer;
 }
 
-.chip-button:hover::after  {
-  content: '';
+.chip-button:hover::after {
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: currentColor; 
+  background-color: currentColor;
   opacity: 0.08;
   border-radius: inherit;
   border: inherit;

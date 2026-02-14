@@ -10,7 +10,7 @@ export function useVisibleChips({
   containerRef,
   chipRefs,
   moreButtonRef,
-}: UseVisibleChipsParams) : number {
+}: UseVisibleChipsParams): number {
   const [visibleCount, setVisibleCount] = useState(chipRefs.current.length);
 
   useLayoutEffect(() => {
@@ -35,7 +35,8 @@ export function useVisibleChips({
       let sum = 0;
       let count = 0;
 
-      const moreWidth = moreButtonRef.current?.getBoundingClientRect().width ?? 0;
+      const moreWidth =
+        moreButtonRef.current?.getBoundingClientRect().width ?? 0;
 
       for (let i = 0; i < chipRefs.current.length; i++) {
         const el = chipRefs.current[i];
@@ -63,6 +64,14 @@ export function useVisibleChips({
 
     const observer = new ResizeObserver(calculate);
     observer.observe(container);
+
+    chipRefs.current.forEach((chip) => {
+      if (chip) observer.observe(chip);
+    });
+
+    if (moreButtonRef.current) {
+      observer.observe(moreButtonRef.current);
+    }
 
     calculate();
 
