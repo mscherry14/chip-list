@@ -9,7 +9,9 @@
 }
 
 .measurable {
-  position: absolute;
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
   visibility: hidden;
   pointer-events: none;
   gap: 8px;

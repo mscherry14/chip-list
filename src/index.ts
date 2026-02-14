@@ -20,4 +20,8 @@ export type {
 //   ChipListPopover,
 //   ChipListPopoverTrigger,
 //   ChipListPopoverContent,
-// } from './ChipListPopover/ChipListPopover';
+// } from './components/ChipListPopover/ChipListPopover';
+
+
+export  { useMultiSelect } from "./components/ChipList/useMultiSelect";
+export  { useVisibleChips } from "./components/ChipList/useVisibleChips";

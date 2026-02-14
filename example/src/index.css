@@ -5,14 +5,14 @@
 
   color-scheme: light dark;
 
-   --color-surface: #242424;
-  --color-on-surface:  white;
+  --color-surface: #242424;
+  --color-on-surface: white;
 
   /* --color-surface: white;
   --color-on-surface:  black; */
 
-  background-color: var(--color-surface, white);
-  color: var(--color-on-surface, black);
+  background-color: var(--color-surface, light-dark(white, black));
+  color: var(--color-on-surface, light-dark(black, white));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -65,6 +65,14 @@ export function useVisibleChips({
     const observer = new ResizeObserver(calculate);
     observer.observe(container);
 
+    chipRefs.current.forEach((chip) => {
+      if (chip) observer.observe(chip);
+    });
+
+    if (moreButtonRef.current) {
+      observer.observe(moreButtonRef.current);
+    }
+
     calculate();
 
     return () => observer.disconnect();

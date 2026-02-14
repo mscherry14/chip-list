@@ -57,40 +57,40 @@
 }
 
 .color-neutral {
-  --chip-color-main: purple;
-  --chip-color-text: #fff;
-  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
-  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+  --trigger-color-main: purple;
+  --trigger-color-text: #fff;
+  --trigger-color-surface: var(--color-surface, light-dark(white, #242424));
+  --trigger-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-accent {
-  --chip-color-main: yellow;
-  --chip-color-text: #000000;
-  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
-  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+  --trigger-color-main: yellow;
+  --trigger-color-text: #000000;
+  --trigger-color-surface: var(--color-surface, light-dark(white, #242424));
+  --trigger-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-error {
-  --chip-color-main: rgb(214, 1, 1);
-  --chip-color-text: #fff;
-  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
-  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+  --trigger-color-main: rgb(214, 1, 1);
+  --trigger-color-text: #fff;
+  --trigger-color-surface: var(--color-surface, light-dark(white, #242424));
+  --trigger-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-info {
-  --chip-color-main: cornflowerblue;
-  --chip-color-text: #000000;
-  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
-  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+  --trigger-color-main: cornflowerblue;
+  --trigger-color-text: #000000;
+  --trigger-color-surface: var(--color-surface, light-dark(white, #242424));
+  --trigger-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-success {
-  --chip-color-main: lime;
-  --chip-color-text: #000000;
-  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
-  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+  --trigger-color-main: lime;
+  --trigger-color-text: #000000;
+  --trigger-color-surface: var(--color-surface, light-dark(white, #242424));
+  --trigger-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 .color-warning {
-  --chip-color-main: orange;
-  --chip-color-text: #000000;
-  --chip-color-surface: var(--color-surface, light-dark(white, #242424));
-  --chip-color-on-surface: var(--color-on-surface, light-dark(black, white));
+  --trigger-color-main: orange;
+  --trigger-color-text: #000000;
+  --trigger-color-surface: var(--color-surface, light-dark(white, #242424));
+  --trigger-color-on-surface: var(--color-on-surface, light-dark(black, white));
 }
 
 /* Size Variants */
@@ -119,29 +119,29 @@
 .variant-filled {
   background-color: color-mix(
     in oklab,
-    var(--chip-color-main) 35%,
+    var(--trigger-color-main) 35%,
     color-mix(
         in oklab,
-        var(--chip-color-text) 20%,
-        var(--chip-color-surface) 100%
+        var(--trigger-color-text) 20%,
+        var(--trigger-color-surface) 100%
       )
       100%
   );
-  color: var(--chip-color-on-surface);
+  color: var(--trigger-color-on-surface);
 }
 
 /* Outlined Variant */
 .variant-outlined {
   color: color-mix(
     in oklab,
-    var(--chip-color-main) 100%,
-    var(--chip-color-on-surface) 60%
+    var(--trigger-color-main) 100%,
+    var(--trigger-color-on-surface) 60%
   );
   background-color: transparent;
   border: 1px solid
     color-mix(
       in oklab,
-      var(--chip-color-main) 90%,
-      var(--chip-color-on-surface) 40%
+      var(--trigger-color-main) 90%,
+      var(--trigger-color-on-surface) 40%
     );
 }
