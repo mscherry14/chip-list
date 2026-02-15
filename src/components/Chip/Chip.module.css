@@ -53,6 +53,10 @@
   opacity: 0.16;
 }
 
+.chip-button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
 .color-neutral {
   --chip-color-main: purple;
   --chip-color-text: #fff;
