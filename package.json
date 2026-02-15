@@ -22,10 +22,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
     "build": "vite build && tsc -b",
     "lint": "eslint .",
-    "preview": "vite preview",
     "example": "vite build && tsc -b && cd example && npm install --legacy-peer-deps && rm -rf node_modules/.vite node_modules/.cache node_modules/react node_modules/react-dom && vite"
   },
     "engines": {
