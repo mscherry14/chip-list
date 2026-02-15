@@ -38,9 +38,9 @@ body {
   flex: 1 1 0;
 }
 
-/* button:focus-visible {
+button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-} */
+}
 
 /* a {
   font-weight: 500;
